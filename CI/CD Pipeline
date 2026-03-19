@@ -20,3 +20,12 @@ jobs:
       run: |
         echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u bryan0123 --password-stdin
         docker push bryan0123/webapp:v1
+
+   - name: Setup kubectl
+       uses: azure/setup-kubectl@v3
+
+   - name: Deploy to Kubernetes
+        run: |
+         kubectl apply -f deployment.yaml
+         kubectl apply -f service.yaml
+         kubectl apply -f ingress.yaml
